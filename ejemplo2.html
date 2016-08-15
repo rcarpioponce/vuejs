@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">  
+<head>  
+    <meta charset="UTF-8">
+    <title>Comanzando con Vue.js</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>  
+<body class="container">  
+   <div id="app" class="container-fluid">
+        <p v-else="nombre">Por favor escribe tu nombre</p>
+        <input class="form-control" type="text" placeholder="Escribe tu nombre" v-model="nombre" />
+        <template v-if="nombre">
+            <h1>{{ gender == 'm' ? 'Bievenido' : 'Bienvenida' }} {{ nombre }}</h1>
+            <p>Espero que disfrutes tu visita</p>    
+        </template>
+        <input type="radio" id="one" value="m" v-model="gender" checked="true">
+        <label for="one">Masculino</label>
+        <br>
+        <input type="radio" id="two" value="f" v-model="gender">
+        <label for="two">Femenino</label>
+
+        <select class="form-control" v-model="gender">
+            <option value="m">Masculino</option>
+            <option value="f">Femenino</option>
+        </select>
+
+
+
+        <p>Tu nombre al revés es: {{ nombre.split('').reverse().join('') }}</p>
+        <p v-if="!nombre" class="alert alert-danger">Este campo es obligatorio</p>
+        <p v-if="nombre.length < 2" class="alert alert-danger">El nombre no es válido</p>
+        <hr>
+        <pre>{{ $data | json }}</pre>
+    </div>
+
+    <script src="http://cdn.jsdelivr.net/vue/1.0.8/vue.min.js"></script>
+    <script>
+    vm = new Vue({
+        el: '#app',
+
+        data: {
+            nombre: '',
+            gender: 'm'
+        }
+    });
+    </script>
+</body>  
+</html>
+
+<!----
+v-if : muestra y oculta elemento dependiendo si en el modelo existe la propiedad indicada (agrega y elimina el elemento del dom)
+
+v-show: agrega o quita elemento con la propiedad display del css
+
+<template></template> nos permite agrupar elementos para ejecutar alguna directiva de vuejs
+-->

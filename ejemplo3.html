@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">  
+<head>  
+    <meta charset="UTF-8">
+    <title>Comanzando con Vue.js</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>  
+<body class="container">  
+   <div id="app" class="container-fluid">
+        <form action="" @submit.prevent="signUp()">            
+            <p>Tu nombre al revés es: {{ nombre.split('').reverse().join('') }}</p>
+            <input class="form-control" type="text" placeholder="Escribe tu nombre" v-model="nombre" />
+            <template v-if="nombre">
+                <h1>{{ gender == 'm' ? 'Bievenido' : 'Bienvenida' }} {{ nombre }}</h1>
+                <p>Espero que disfrutes tu visita</p>    
+            </template>
+            <p v-else="nombre">Por favor escribe tu nombre</p>
+            <p v-if="!nombre" class="alert alert-danger">Este campo es obligatorio</p>
+            <input type="radio" id="one" value="m" v-model="gender" checked="true">
+            <label for="one">Masculino</label>
+            <br>
+            <input type="radio" id="two" value="f" v-model="gender">
+            <label for="two">Femenino</label>
+            <p>años de experiencia con php?</p>
+            <p>Respuesta: <strong>{{ years_php }}</strong>
+            <button class="btn" @click.prevent="yearsPhp(true)">+</button>
+            <button class="btn" @click.prevent="yearsPhp()">-</button>
+            </p>
+            
+            <hr>
+            <p>
+                <button class="btn btn-primary">Registrar</button> 
+                <button class="btn btn-primary" @click.prevent="signUp(true)">Registrar y Salir del sistema</button>
+            </p>
+            <pre>{{ $data | json }}</pre>
+        </form>
+    </div>
+
+    <script src="http://cdn.jsdelivr.net/vue/1.0.8/vue.min.js"></script>
+    <script>
+    vm = new Vue({
+        el: '#app',
+
+        data: {
+            nombre: '',
+            gender: 'm',
+            years_php: 0
+        },
+        methods:{
+            signUp: function(logout){
+                alert('signUp ' + this.nombre);
+                if(logout){
+                    alert('saliendo del sistema');
+                }
+            },
+            yearsPhp : function(sumar){
+                if(sumar){
+                    this.years_php ++;
+                }else{
+                    if(this.years_php > 0){
+                        this.years_php --;
+                    }
+                }
+            }
+        }
+    });
+    </script>
+</body>  
+</html>
+
+<!----
+v-on: es equivalente a un @
+-->
